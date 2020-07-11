@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".MainActivity">
+
+
+
+
+
+    <EditText
+        android:id="@+id/email2"
+        android:layout_width="347dp"
+        android:layout_height="43dp"
+        android:background="@drawable/edit_round"
+        android:drawableStart="@drawable/ic_email"
+        android:drawableLeft="@drawable/ic_email"
+        android:gravity="center"
+        android:hint="Enter Email"
+        android:inputType="text"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.454"
+        tools:ignore="MissingConstraints,TextFields"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="347dp"
+        android:layout_height="43dp"
+        android:background="@drawable/edit_round"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawableLeft="@drawable/ic_lock"
+        android:gravity="center"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="231dp"
+        android:layout_height="44dp"
+        android:background="@drawable/round_btn"
+        android:text="Log In"
+        android:textColor="#fff"
+        android:textSize="22dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.818"
+        tools:ignore="InvalidId,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/accnt"
+        android:layout_width="163dp"
+        android:layout_height="27dp"
+        android:gravity="center"
+        android:text="Create account"
+        android:textColor="#61F1E3"
+        android:textSize="19sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.762"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="163dp"
+        android:layout_height="27dp"
+        android:gravity="center"
+        android:text="Forgot Password"
+        android:textColor="#EFF4F4"
+        android:textSize="19sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.642"
+        tools:ignore="DuplicateIds,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/newuser"
+        android:layout_width="163dp"
+        android:layout_height="27dp"
+        android:gravity="center"
+        android:text="New user?"
+        android:textColor="#EFF4F4"
+        android:textSize="19sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.31"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        tools:ignore="MissingConstraints" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/poster4"
+            tools:ignore="MissingConstraints" />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

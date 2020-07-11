@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frag2"
+    android:background="@drawable/gradient_2"
+    tools:context=".account_setting">
+
+    <TextView
+        android:layout_width="177dp"
+        android:layout_height="31dp"
+        android:text="Change image"
+        android:textStyle="italic|bold"
+        android:textColor="#93EAE1"
+        android:textSize="24dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/firstname"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.369"
+        tools:ignore="MissingConstraints" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_images"
+        android:layout_width="207dp"
+        android:layout_height="178dp"
+        android:src="@drawable/profile"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/firstname"
+        android:layout_width="378dp"
+        android:layout_height="39dp"
+        android:hint="Unique Name"
+        android:inputType="text"
+        android:textColor="#fff"
+        android:textColorHighlight="#fff"
+        android:textColorHint="#fff"
+        android:textColorLink="#FFFFFF"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        tools:ignore="DuplicateIds,MissingConstraints" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:inputType="text"
+
+        android:layout_width="378dp"
+        android:layout_height="39dp"
+        android:hint="User Name"
+        android:textStyle="bold|italic"
+        android:textColor="#fff"
+        android:textColorHighlight="#fff"
+        android:textColorHint="#fff"
+        android:textColorLink="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.541"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/about"
+        android:layout_width="378dp"
+        android:layout_height="39dp"
+        android:hint="About"
+        android:textColor="#fff"
+        android:textColorHighlight="#fff"
+        android:textColorHint="#fff"
+        android:textStyle="bold|italic"
+        android:textColorLink="#fff"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.616"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/save_change"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/ic_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.997"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/cancel"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/ic_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="347dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:background="@drawable/logout"
+        android:text="Logout"
+        android:textColor="#fff"
+        android:textSize="22dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801"
+        tools:ignore="DuplicateIds,InvalidId,MissingConstraints" />
+
+    <Button
+        android:id="@+id/delete_acc"
+        android:layout_width="347dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:background="@drawable/delete"
+        android:text="Delete Account"
+        android:textColor="#fff"
+        android:textSize="22dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.943"
+        tools:ignore="InvalidId,MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
