@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_2"
+    tools:context=".option"
+    tools:ignore="MissingConstraints">
+
+
+    <TextView
+        android:layout_width="413dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="121dp"
+        android:gravity="center"
+        android:text="Choose your category"
+        android:textColor="#0B0B0B"
+        android:textSize="37dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <Button
+        android:id="@+id/singing"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Singing"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/dancing"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Dancing"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/craft"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Craft"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/raping"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Raping"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/art"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Art"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/teaching"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Teaching"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.364"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/meme"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Meme"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/facts"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Facts"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/comedy"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Comedy"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds,MissingConstraints" />
+
+    <Button
+        android:id="@+id/music"
+        android:layout_width="110dp"
+        android:layout_height="37dp"
+        android:background="@drawable/black"
+        android:text="#   Music"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636"
+        tools:ignore="DuplicateIds,MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

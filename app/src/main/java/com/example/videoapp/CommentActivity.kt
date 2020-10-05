@@ -1,10 +1,11 @@
 package com.example.videoapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,8 +15,11 @@ import com.example.videoapp.Model.ContentDTO
 import com.example.videoapp.Model.FcmPush
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.item_comment.view.*
+import kotlinx.android.synthetic.main.item_detail.view.*
+
 
 class CommentActivity : AppCompatActivity() {
     var contentUid : String? = null
@@ -23,8 +27,10 @@ class CommentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         contentUid = intent.getStringExtra("contentUid")
         destinationUid = intent.getStringExtra("destinationUid")
+
 
         comment_recyclerview.adapter = CommentRecyclerviewAdapter()
         comment_recyclerview.layoutManager = LinearLayoutManager(this)
@@ -35,11 +41,10 @@ class CommentActivity : AppCompatActivity() {
             comment.uid = FirebaseAuth.getInstance().currentUser?.uid
             comment.comment = comment_edit_message.text.toString()
             comment.timestamp = System.currentTimeMillis()
-            comment_edit_message.setText(" ")
 
-//            FirebaseFirestore.getInstance().collection("images").document(contentUid!!).collection("comments").document().set(comment)
-//            commentAlarm(destinationUid!!,comment_edit_message.text.toString())
-//            comment_edit_message.setText("")
+            FirebaseFirestore.getInstance().collection("images").document(contentUid!!).collection("comments").document().set(comment)
+            commentAlarm(destinationUid!!,comment_edit_message.text.toString())
+            comment_edit_message.setText("")
         }
     }
     fun commentAlarm(destinationUid : String, message : String){
@@ -57,22 +62,26 @@ class CommentActivity : AppCompatActivity() {
     }
     inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+        var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
+
         var comments : ArrayList<ContentDTO.Comment> = arrayListOf()
         init {
-            FirebaseFirestore.getInstance()
-                .collection("images")
-                .document(contentUid!!)
-                .collection("comments")
-                .orderBy("timestamp")
-                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    comments.clear()
-                    if(querySnapshot == null)return@addSnapshotListener
+            contentUid?.let {
+                FirebaseFirestore.getInstance()
+                    .collection("images")
+                    .document(it)
+                    .collection("comments")
+                    .orderBy("timestamp")
+                    .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                        comments.clear()
+                        if(querySnapshot == null)return@addSnapshotListener
 
-                    for(snapshot in querySnapshot.documents){
-                        comments.add(snapshot.toObject(ContentDTO.Comment::class.java)!!)
+                        for(snapshot in querySnapshot.documents){
+                            comments.add(snapshot.toObject(ContentDTO.Comment::class.java)!!)
+                        }
+                        notifyDataSetChanged()
                     }
-                    notifyDataSetChanged()
-                }
+            }
         }
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(p0.context).inflate(R.layout.item_comment,p0,false)
@@ -90,6 +99,7 @@ class CommentActivity : AppCompatActivity() {
             view.commentviewitem_textview_comment.text = comments[p1].comment
             view.commentviewitem_textview_profile.text = comments[p1].userId
 
+
             FirebaseFirestore.getInstance()
                 .collection("profileImages")
                 .document(comments[p1].uid!!)
@@ -102,5 +112,4 @@ class CommentActivity : AppCompatActivity() {
                 }
         }
 
-    }
-}
+    }}

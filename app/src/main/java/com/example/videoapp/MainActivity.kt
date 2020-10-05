@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.PatternsCompat
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_create_acc.*
-import kotlinx.android.synthetic.main.activity_create_acc.accnt
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.regex.Pattern
 

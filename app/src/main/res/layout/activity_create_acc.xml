@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053"
+        app:layout_constraintVertical_bias="0.326"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.149"
+        app:layout_constraintVertical_bias="0.438"
         tools:ignore="DuplicateIds,MissingConstraints" />
 
     <EditText
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.245"
+        app:layout_constraintVertical_bias="0.551"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -81,78 +81,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371"
+        app:layout_constraintVertical_bias="0.704"
         tools:ignore="InvalidId,MissingConstraints" />
 
     <TextView
-        android:id="@+id/accnt"
-        android:layout_width="163dp"
-        android:layout_height="27dp"
-        android:gravity="center"
-        android:text="Or"
-        android:textColor="#fff"
-        android:textSize="23sp"
+        android:layout_width="395dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="parent"
         android:textStyle="italic|bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481"
-        tools:ignore="MissingConstraints" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="163dp"
-        android:layout_height="1dp"
-        android:background="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="163dp"
-        android:layout_height="1dp"
-        android:background="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.935"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/facebook_btn"
-        android:layout_width="199dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="196dp"
-        android:background="@drawable/facebook_btn"
-        android:gravity="fill_vertical"
         android:textColor="#fff"
-        android:textSize="19dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
+        android:text="Create account"
+        android:gravity="center"
+        android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_btn"
-        android:layout_width="199dp"
-        android:layout_height="58dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763"
+        app:layout_constraintVertical_bias="0.207"
         tools:ignore="MissingConstraints" />
 
 

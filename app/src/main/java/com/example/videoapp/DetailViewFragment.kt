@@ -6,23 +6,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.videoapp.Model.AlarmDTO
 import com.example.videoapp.Model.ContentDTO
+import com.example.videoapp.Model.FcmPush
 import com.example.videoapp.Model.Users
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_comment.*
-import kotlinx.android.synthetic.main.activity_comment.view.*
-import kotlinx.android.synthetic.main.activity_create_acc.view.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
-import kotlinx.android.synthetic.main.item_detail.view.detailviewitem_comment_imageview
+import java.lang.Exception
 
 
 class DetailViewFragment(
@@ -35,19 +42,47 @@ class DetailViewFragment(
     lateinit var mAuth: FirebaseAuth
     lateinit var comment_btn_send: FirebaseAuth
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var fragmentview = LayoutInflater.from(activity).inflate(R.layout.fragment_detail,container,false)
         firestore = FirebaseFirestore.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
+
+
+        fragmentview.videofragment?.setOnClickListener {
+            var fragment = BlankFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frag,fragment)?.commit()
+
+        }
+        fragmentview.memefragment?.setOnClickListener {
+            var fragment = DetailViewFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frag,fragment)?.commit()
+
+        }
+
+            fragmentview.swiperefresh?.setOnRefreshListener {
+                fragmentview.detailviewfragment_recyclerview.adapter = this.DetailViewRecyclerViewAdapter()
+                (fragmentview.detailviewfragment_recyclerview.adapter as DetailViewRecyclerViewAdapter).notifyDataSetChanged()
+                fragmentview.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
+                (fragmentview.detailviewfragment_recyclerview.adapter as DetailViewRecyclerViewAdapter).notifyDataSetChanged()
+
+                fragmentview.swiperefresh?.isRefreshing = false   // reset the SwipeRefreshLayout (stop the loading spinner)
+        }
+
+
 
         fragmentview.detailviewfragment_recyclerview.adapter = this.DetailViewRecyclerViewAdapter()
         fragmentview.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
         return fragmentview
 
     }
+
+
+
     inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
         var contentUidList : ArrayList<String> = arrayListOf()
+
 
         init {
 
@@ -60,20 +95,24 @@ class DetailViewFragment(
 
                 for(snapshot in querySnapshot.documents){
                     var item = snapshot.toObject(ContentDTO::class.java)
-                    contentDTOs.add(item!!)
-                    contentUidList.add(snapshot.id)
+                    item?.let { contentDTOs.add(0, it) }
+                    contentUidList.add(0,snapshot.id)
                 }
                 notifyDataSetChanged()
             }
 
         }
 
+
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(p0.context).inflate(R.layout.item_detail,p0,false)
             return CustomViewHolder(view)
         }
 
-        inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view)
+        inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view){
+            var alarmDTOList : ArrayList<AlarmDTO> = arrayListOf()
+
+        }
 
         override fun getItemCount(): Int {
             return contentDTOs.size
@@ -85,11 +124,27 @@ class DetailViewFragment(
         override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
             var viewholder = (p0 as CustomViewHolder).itemView
 
+            val str_0 = contentDTOs[p1].userId
+            viewholder.idname?.text  = str_0
 
-            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+
+            FirebaseFirestore.getInstance().collection("profileImages").document(contentDTOs[p1].uid!!).get().addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    val url = task.result!!["image"]
+                    if (activity==null){
+                        return@addOnCompleteListener
+                    }
+                    else{
+                    Glide.with(viewholder.context).load(url).apply(RequestOptions().circleCrop()).into(
+                        viewholder.detailviewitem_profile_image as ImageView?
+                    )}
+                }
+            }
+
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
 
             val rootRef = FirebaseDatabase.getInstance().reference
-            val uidRef = rootRef.child("Usuarios").child(uid)
+            val uidRef = uid?.let { rootRef.child("Usuarios").child(it) }
             val eventListener: ValueEventListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val namess: String? =
@@ -98,7 +153,7 @@ class DetailViewFragment(
 
                 override fun onCancelled(databaseError: DatabaseError) {}
             }
-            uidRef.addListenerForSingleValueEvent(eventListener)
+            uidRef?.addListenerForSingleValueEvent(eventListener)
 
                 viewholder.detailviewitem_comment_imageview.setOnClickListener {
                 var intent = Intent(context,CommentActivity::class.java)
@@ -108,6 +163,21 @@ class DetailViewFragment(
 
             //Image
             Glide.with(p0.itemView.context).load(contentDTOs[p1].imageUrl).into(viewholder.detailviewitem_imageview_content)
+            var user = FirebaseAuth.getInstance().currentUser
+            val uids = arguments?.getString("destinationUid")
+
+            firestore = FirebaseFirestore.getInstance()
+            val auth = FirebaseAuth.getInstance()
+           val currentUserUid = auth.currentUser?.uid
+
+
+//            FirebaseFirestore.getInstance().collection("profileImages").document(contentDTOs[p1].uid!!).delete().addOnSuccessListener {
+//                Toast.makeText(context,"Your post successfully deleted",Toast.LENGTH_SHORT).show()
+//
+//                // File deleted successfully
+//            }.addOnFailureListener {
+//                Toast.makeText(context,"Cannot delete your post",Toast.LENGTH_SHORT).show()
+//                 }
 
             //Explain of content
             viewholder.detailviewitem_explain_textview.text = contentDTOs[p1].explain
@@ -144,6 +214,7 @@ class DetailViewFragment(
                 intent.putExtra("destinationUid",contentDTOs[p1].uid)
                 startActivity(intent)
             }
+
         }
         fun favoriteEvent(position : Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
@@ -154,20 +225,38 @@ class DetailViewFragment(
 
                 if(contentDTO!!.favorites.containsKey(uid)){
                     //When the button is clicked
-                    contentDTO?.favoriteCount = contentDTO?.favoriteCount - 1
-                    contentDTO?.favorites.remove(uid)
+                    contentDTO.favoriteCount = contentDTO.favoriteCount - 1
+                    contentDTO.favorites.remove(uid)
                 }else{
                     //When the button is not clicked
-                    contentDTO?.favoriteCount = contentDTO?.favoriteCount + 1
-                    contentDTO?.favorites[uid!!] = true
+                    contentDTO.favoriteCount = contentDTO.favoriteCount + 1
+                    contentDTO.favorites[uid!!] = true
+                    favoriteAlarm(contentDTOs[position].uid!!)
 
                 }
                 transaction.set(tsDoc,contentDTO)
             }
         }
 
+        fun favoriteAlarm(destinationUid : String){
+            var alarmDTO = AlarmDTO()
+            alarmDTO.destinationUid = destinationUid
+            alarmDTO.userId = FirebaseAuth.getInstance().currentUser?.email
+            alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid
+            alarmDTO.kind = 0
+            alarmDTO.timestamp = System.currentTimeMillis()
+            FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+            var message = FirebaseAuth.getInstance().currentUser?.email + " " + getString(R.string.alarm_favorite)
+            FcmPush.instance.sendMessage(destinationUid,"Memeria",message)
+
+        }
+
+
+
 
     }
+
     }
 
 

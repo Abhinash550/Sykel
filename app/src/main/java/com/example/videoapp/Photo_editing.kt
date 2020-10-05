@@ -2,7 +2,6 @@ package com.example.videoapp
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -10,15 +9,15 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
-import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.SeekBar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_photo_editing.*
+import java.io.*
 
 
 class Photo_editing : AppCompatActivity() {
@@ -34,10 +33,6 @@ class Photo_editing : AppCompatActivity() {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
         startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
-        done.setOnClickListener {
-            startActivity(Intent(this,Photo_description::class.java))
-            getBitmapFromView(this,background_color)
-        }
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(sk: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -58,15 +53,16 @@ class Photo_editing : AppCompatActivity() {
 
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == PICK_IMAGE_FROM_ALBUM){
-            if(resultCode == Activity.RESULT_OK){
+        if (requestCode == PICK_IMAGE_FROM_ALBUM) {
+            if (resultCode == Activity.RESULT_OK) {
                 //This is path to the selected image
                 photoUri = data?.data
                 imageView.setImageURI(photoUri)
 
-            }else{
+            } else {
                 //Exit the addPhotoActivity if you leave the album without selecting it
                 finish()
 
@@ -74,49 +70,18 @@ class Photo_editing : AppCompatActivity() {
         }
     }
 
-    private fun getBitmapFromView(
-        ctx: Context,
-        view: View
-    ): Bitmap? {
-        view.layoutParams = ConstraintLayout.LayoutParams(
-            ConstraintLayout.LayoutParams.MATCH_PARENT,
-            ConstraintLayout.LayoutParams.MATCH_PARENT
-        )
-        val dm = ctx.resources.displayMetrics
-        view.measure(
-            View.MeasureSpec.makeMeasureSpec(
-                dm.widthPixels,
-                View.MeasureSpec.EXACTLY
-            ),
-            View.MeasureSpec.makeMeasureSpec(
-                dm.heightPixels,
-                View.MeasureSpec.EXACTLY
-            )
-        )
-        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-        val bitmap = Bitmap.createBitmap(
-            view.measuredWidth,
-            view.measuredHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        view.layout(view.left, view.top, view.right, view.bottom)
-        view.draw(canvas)
-        return bitmap
-    }
-
 
     @SuppressLint("Range")
-    fun colors(v:View){
-       val popup = PopupMenu(this,v).apply {
-           inflate(R.menu.options)
+    fun colors(v: View) {
+        val popup = PopupMenu(this, v).apply {
+            inflate(R.menu.options)
 
-           show()
+            show()
 
 
-       }
+        }
         popup.setOnMenuItemClickListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.red -> {
                     background_color.setBackgroundColor(Color.parseColor("Red"))
                 }
@@ -141,47 +106,50 @@ class Photo_editing : AppCompatActivity() {
 
         }
 
-        }
+    }
+
     @SuppressLint("Range")
-    fun style(v:View){
-       val popup = PopupMenu(this,v).apply {
-           inflate(R.menu.positions)
+    fun style(v: View) {
+        val popup = PopupMenu(this, v).apply {
+            inflate(R.menu.positions)
 
-           show()
+            show()
 
 
-       }
+        }
         popup.setOnMenuItemClickListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.top -> {
-                    text1.setTextAppearance(applicationContext,R.style.Bold)
+                    text1.setTextAppearance(applicationContext, R.style.Bold)
                 }
                 R.id.middle -> {
-                    text2.setTextAppearance(applicationContext,R.style.Bold)
+                    text2.setTextAppearance(applicationContext, R.style.Bold)
                 }
                 R.id.full -> {
-                    text1.setTextAppearance(applicationContext,R.style.Normal)
+                    text1.setTextAppearance(applicationContext, R.style.Normal)
                 }
                 R.id.normal -> {
-                    text2.setTextAppearance(applicationContext,R.style.Normal)
+                    text2.setTextAppearance(applicationContext, R.style.Normal)
                 }
             }
             true
 
         }
 
-        }
+    }
+
+
     @SuppressLint("Range")
-    fun text_color(v:View){
-       val popup = PopupMenu(this,v).apply {
-           inflate(R.menu.options)
+    fun text_color(v: View) {
+        val popup = PopupMenu(this, v).apply {
+            inflate(R.menu.options)
 
-           show()
+            show()
 
 
-       }
+        }
         popup.setOnMenuItemClickListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.red -> {
                     text1.setTextColor(Color.parseColor("Red"))
                     text2.setTextColor(Color.parseColor("Red"))
@@ -219,18 +187,17 @@ class Photo_editing : AppCompatActivity() {
                     text1.setHintTextColor(Color.parseColor("Green"))
                     text2.setHintTextColor(Color.parseColor("Green"))
                 }
-                R.id.black ->{
+                R.id.black -> {
                     text1.setTextColor(Color.parseColor("Black"))
                     text2.setTextColor(Color.parseColor("Black"))
                     text1.setHintTextColor(Color.parseColor("Black"))
-                    text2.setHintTextColor(Color.parseColor("Black"))}
+                    text2.setHintTextColor(Color.parseColor("Black"))
+                }
             }
             true
 
         }
 
-        }
-
-
     }
 
+}

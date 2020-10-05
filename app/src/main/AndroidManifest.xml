@@ -1,44 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.videoapp">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.videoapp"
+    tools:ignore="ExtraText">
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.camera2.full" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="Manifest.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Chooses"></activity>
-        <activity android:name=".Photo_description" />
-        <activity android:name=".CommentActivity" />
-        <activity android:name=".add_photos" />
-        <activity android:name=".Photo_editing" />
-        <activity android:name=".choose" />
-        <activity android:name=".forgot_password" />
-        <activity android:name=".Hero" />
-        <activity android:name=".record" />
-        <activity android:name=".account_setting" />
-        <activity android:name=".create_acc" />
-        <activity android:name=".video" />
-        <activity android:name=".MainActivity">
+        android:label="Memeria"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="ExtraText"
+        tools:replace="android:supportsRtl">
+
+        <activity android:name=".Gallery_Upload">
+
+        </activity>
+        <activity android:name=".Camera_view"></activity>
+        <activity android:name=".MediaRecorderRecipes">
+
+        </activity>
+        <activity android:name=".option">
+        </activity>
+        <activity android:name=".splash_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- For Android API above 24+ we need this FileProvider -->
+
+        </activity>
+        <activity android:name=".Chooses"></activity>
+        <activity
+            android:name=".CommentActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Photo_description" />
+        <activity android:name=".Sign_out_dialog"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".add_photos" />
+        <activity android:name=".Photo_editing" />
+        <activity android:name=".forgot_password" />
+        <activity android:name=".Hero" />
+        <activity android:name=".record"></activity>
+        <activity android:name=".account_setting" />
+        <activity android:name=".create_acc" />
+        <activity android:name=".video" >
+
+        </activity>
+        <activity android:name=".MainActivity" />
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="$(applicationId).fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/memeria" />
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />

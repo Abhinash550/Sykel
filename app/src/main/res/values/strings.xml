@@ -43,7 +43,7 @@
     <string name="count_0">0</string>
 
     <!-- Alarm -->
-    <string name="alarm_favorite">Liked the press</string>
+    <string name="alarm_favorite"> Liked your post</string>
     <string name="alarm_comment">left a message</string>
     <string name="alarm_follow">has started to follow your account</string>
 
@@ -62,5 +62,15 @@
     <!-- etc -->
     <item name="visible" type="id" />
     <item name="masked" type="id" />
+
+    <string name="btnTakePicture">Capture Image</string>
+    <string name="msg_loading">Loading</string>
+    <string name="btnRecordVideo">Record Video</string>
+    <string name="or">(or)</string>
+    <string name="btnUploadToServer">Upload to Server</string>
+    <string name="video_button">video_button</string>
+    <string name="do_you_realy_want_to_exit">Do you realy want to exit ?</string>
+    <string name="record">Record</string>
+    <string name="image_description">Image Description</string>
 
 </resources>

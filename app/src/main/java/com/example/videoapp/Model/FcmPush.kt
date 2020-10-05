@@ -9,7 +9,7 @@ class FcmPush {
 
     var JSON = MediaType.parse("application/json; charset=utf-8")
     var url = "https://fcm.googleapis.com/fcm/send"
-    var serverKey = "AIzaSyAxYZf9XAFiJ3ehEK9cXZrniIuHsHi2nFU"
+    var serverKey = "AAAAGfiI2rc:APA91bGa_ZXi2MWx90-2OdTBtB2vq4XeiD-FBvL407tMib1jtChBIhzKCcJdOZ4duwacByE8pg60L9Wl_XrPhLbPWRwLcIr8FtdCONQoeFGxN9NBJk269EVKjUE3YNI6XCSATGgCU-pY"
     var gson : Gson? = null
     var okHttpClient : OkHttpClient? = null
     companion object{
@@ -24,7 +24,7 @@ class FcmPush {
         FirebaseFirestore.getInstance().collection("pushtokens").document(destinationUid).get().addOnCompleteListener {
                 task ->
             if(task.isSuccessful){
-                var token = task?.result?.get("pushToken").toString()
+                var token = task.result?.get("pushToken").toString()
 
                 var pushDTO = PushDTO()
                 pushDTO.to = token

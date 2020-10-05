@@ -7,14 +7,16 @@
     android:background="@drawable/gradient_2"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        android:textColor="#121313"
-        android:textSize="45sp"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/alarmfragment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 
 

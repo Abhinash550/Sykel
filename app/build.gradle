@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.videoapp"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1
@@ -77,9 +77,13 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:10.0.0"
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.facebook.android:facebook-login:5.15.3'
-    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-firestore:21.5.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.android.exoplayer:exoplayer:r1.4.1'
+//    implementation 'com.google.android.exoplayer:exoplayer-core:2.X.X'
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
     //noinspection AnnotationProcessorOnCompilePath
 
 

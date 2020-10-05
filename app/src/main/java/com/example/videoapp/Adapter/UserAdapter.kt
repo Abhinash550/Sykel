@@ -50,7 +50,7 @@ class UserAdapter(private val mContext: Context,
             val pref = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit()
             pref.putString("profileId",user.id)
             pref.apply()
-            (mContext as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.SecondFragment,
+            (mContext as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.explorent,
                 ProfileFragment()
             )
                 .commit()

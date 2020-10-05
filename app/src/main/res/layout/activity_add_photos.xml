@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragg"
     android:background="@drawable/gradient_2"
     tools:context=".add_photos">
 
@@ -22,27 +23,10 @@
         tools:ignore="MissingConstraints" />
 
 
-    <Button
-        android:id="@+id/edit"
-        android:layout_width="151dp"
-        android:layout_height="44dp"
-        android:background="@android:color/transparent"
-        android:text="      Edit ->"
-        android:textSize="24sp"
-        android:textColor="#fff"
-        android:textStyle="italic|bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
-        tools:ignore="DuplicateIds,MissingConstraints,OnClick" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="382dp"
-        android:layout_height="107dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:hint="Image Description"
+            android:text="#Meme"
             android:textStyle="italic"
             android:textColor="#fff"
             android:textColorHint="#fff"

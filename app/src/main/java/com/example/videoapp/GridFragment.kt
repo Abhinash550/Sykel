@@ -26,8 +26,8 @@ class GridFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentView = LayoutInflater.from(activity).inflate(R.layout.fragment_grid,container,false)
         firestore = FirebaseFirestore.getInstance()
-        fragmentView?.gridfragment_recyclerview?.adapter = UserFragmentRecyclerViewAdapter()
-        fragmentView?.gridfragment_recyclerview?.layoutManager =
+        fragmentView.gridfragment_recyclerview?.adapter = UserFragmentRecyclerViewAdapter()
+        fragmentView.gridfragment_recyclerview?.layoutManager =
             GridLayoutManager(activity, 3)
         return fragmentView
     }
@@ -40,7 +40,7 @@ class GridFragment : Fragment(){
 
                 //Get data
                 for(snapshot in querySnapshot.documents){
-                    contentDTOs.add(snapshot.toObject(ContentDTO::class.java)!!)
+                    contentDTOs.add(0,snapshot.toObject(ContentDTO::class.java)!!)
                 }
                 notifyDataSetChanged()
             }

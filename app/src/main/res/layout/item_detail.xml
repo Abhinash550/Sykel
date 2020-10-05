@@ -80,17 +80,16 @@
 
     <TextView
         android:id="@+id/detailviewitem_explain_textview"
-        android:layout_width="333dp"
+        android:layout_width="321dp"
         android:layout_height="123dp"
-        android:text="Explain content"
         android:textColor="#fff"
         android:textStyle="italic|bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985"
+        app:layout_constraintVertical_bias="0.97"
         tools:ignore="MissingConstraints" />
 
 
