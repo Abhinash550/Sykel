@@ -72,6 +72,7 @@ class ProfileFragment : Fragment() {
                 auth?.signOut()
                 }
         }
+
         if (uid!=currentUserUid){
             //OtherUserPage
 
