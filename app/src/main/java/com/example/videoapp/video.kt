@@ -45,7 +45,7 @@ class video : AppCompatActivity() {
         setContentView(R.layout.activity_video)
         fabs?.setOnClickListener {
 
-                startActivity(Intent(this,record::class.java))
+                startActivity(Intent(this,add_photos::class.java))
             }
 
 
@@ -79,13 +79,14 @@ class video : AppCompatActivity() {
 
                 }
                 R.id.profile -> {
-                    replace(save_image())
+                    replace(ProfileFragment())
                     var bundle = Bundle()
                     var uid = FirebaseAuth.getInstance().currentUser?.uid
                     var profile = save_image()
 
                     bundle.putString("destinationUid",uid)
                     profile.arguments = bundle
+//                    startActivity(Intent(this,Profile_activity::class.java))
 
                 }
 

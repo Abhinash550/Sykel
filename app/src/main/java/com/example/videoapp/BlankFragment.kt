@@ -370,16 +370,16 @@ private var player: SimpleExoPlayer? = null
             player?.setPlayWhenReady(false)
         }
     }
-    override fun onDestroy() {
-        releasePlayer()
-        super.onDestroy()
-    }
+//    override fun onDestroy() {
+//        releasePlayer()
+//        super.onDestroy()
+//    }
 
-    private fun releasePlayer() {
-        exoplayer.stop()
-        exoplayer.release()
-//        exoplayer? = null
-    }
+//    private fun releasePlayer() {
+//        view.exoplayer.stop()
+//        exoplayer.release()
+////        exoplayer? = null
+//    }
 
 
 }

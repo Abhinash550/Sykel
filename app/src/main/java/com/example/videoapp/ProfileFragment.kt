@@ -1,3 +1,5 @@
+// Profile Fragment of app
+
 package com.example.videoapp
 
 import android.annotation.SuppressLint
@@ -75,6 +77,7 @@ class ProfileFragment : Fragment() {
 
             fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow)
             fragmentView?.account_btn_follow_signout?.setOnClickListener {
+//                Follow button
                 requestFollow()
             }
 
@@ -83,6 +86,7 @@ class ProfileFragment : Fragment() {
         fragmentView?.account_reyclerview?.layoutManager = GridLayoutManager(activity, 3)
 
         this.fragmentView?.account_iv_profile?.setOnClickListener {
+//            Profile Image
             var photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             activity?.startActivityForResult(photoPickerIntent,PICK_PROFILE_FROM_ALBUM)
@@ -187,20 +191,22 @@ class ProfileFragment : Fragment() {
         FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
 
         var message = auth?.currentUser?.email + getString(R.string.alarm_follow)
-        FcmPush.instance.sendMessage(destinationUid,"Howlstagram",message)
+        FcmPush.instance.sendMessage(destinationUid,"Memeria",message)
     }
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("UseRequireInsteadOfGet")
 
     fun getProfileImage(){
+
         uid?.let {
             firestore?.collection("profileImages")?.document(it)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                 if(documentSnapshot == null) return@addSnapshotListener
-                if(documentSnapshot.data != null){
                     val url = documentSnapshot.data!!["image"]
-                     Glide.with(activity?.applicationContext).load(url).apply(RequestOptions().circleCrop()).into(fragmentView?.account_iv_profile!!)
+
+
+                    Glide.with(activity?.applicationContext).load(url).into(fragmentView?.account_iv_profile!!)
                 }
-            }
+
         }
     }
     inner class UserFragmentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -239,6 +245,7 @@ class ProfileFragment : Fragment() {
         override fun getItemCount(): Int {
             return contentDTOs.size
         }
+
 
         override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
 

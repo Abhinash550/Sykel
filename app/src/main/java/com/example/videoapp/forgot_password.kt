@@ -39,8 +39,7 @@ class forgot_password : AppCompatActivity() {
                 startActivity(Intent(this,MainActivity::class.java))
                 finish()
                 Toast.makeText(applicationContext,"Please check your inbox , we have sent you a mail.",Toast.LENGTH_LONG).show()
-
-
+                finish()
             }
         }
 

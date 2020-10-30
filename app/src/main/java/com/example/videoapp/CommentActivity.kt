@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,16 +36,23 @@ class CommentActivity : AppCompatActivity() {
         comment_recyclerview.adapter = CommentRecyclerviewAdapter()
         comment_recyclerview.layoutManager = LinearLayoutManager(this)
 
-        comment_btn_send?.setOnClickListener {
-            var comment = ContentDTO.Comment()
-            comment.userId = FirebaseAuth.getInstance().currentUser?.email
-            comment.uid = FirebaseAuth.getInstance().currentUser?.uid
-            comment.comment = comment_edit_message.text.toString()
-            comment.timestamp = System.currentTimeMillis()
-
-            FirebaseFirestore.getInstance().collection("images").document(contentUid!!).collection("comments").document().set(comment)
-            commentAlarm(destinationUid!!,comment_edit_message.text.toString())
-            comment_edit_message.setText("")
+        if (comment_edit_message.length() == 0){
+            comment_btn_send?.setOnClickListener {
+                Toast.makeText(this,"No comment",Toast.LENGTH_SHORT).show()
+            }
+            }
+        else {
+            comment_btn_send?.setOnClickListener {
+                var comment = ContentDTO.Comment()
+                comment.userId = FirebaseAuth.getInstance().currentUser?.email
+                comment.uid = FirebaseAuth.getInstance().currentUser?.uid
+                comment.comment = comment_edit_message.text.toString()
+                comment.timestamp = System.currentTimeMillis()
+                FirebaseFirestore.getInstance().collection("images").document(contentUid!!)
+                    .collection("comments").document().set(comment)
+                commentAlarm(destinationUid!!, comment_edit_message.text.toString())
+                comment_edit_message.setText("")
+            }
         }
     }
     fun commentAlarm(destinationUid : String, message : String){

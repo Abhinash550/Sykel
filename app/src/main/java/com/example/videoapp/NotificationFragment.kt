@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.videoapp.Model.AlarmDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_notification.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import kotlinx.android.synthetic.main.item_comment.view.commentviewitem_imageview_profile
@@ -64,6 +65,20 @@ class NotificationFragment : Fragment() {
             var view = p0.itemView
 
             view.notification_layout.setOnLongClickListener {
+
+                val storageRef =
+                        FirebaseFirestore.getInstance().collection("alarms").document("alarms")
+
+                storageRef.delete().addOnSuccessListener {
+                    // File deleted successfully
+                    Toast.makeText(context , "Deleted",Toast.LENGTH_SHORT).show()
+
+                }.addOnFailureListener {
+                    // Uh-oh, an error occurred!
+                    Toast.makeText(context , "cannot delete",Toast.LENGTH_SHORT).show()
+                }
+
+
 //                val popups = PopupMenu(context, view).apply {
 //                    inflate(R.menu.delete)
 //
@@ -94,6 +109,8 @@ class NotificationFragment : Fragment() {
 
                 return@setOnLongClickListener true
             }
+
+
             view.commentviewitem_imageview_profile.setOnClickListener {
                 var fragment = ProfileFragment()
                 var bundle = Bundle()

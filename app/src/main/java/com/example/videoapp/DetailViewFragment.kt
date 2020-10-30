@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +17,6 @@ import com.example.videoapp.Model.AlarmDTO
 import com.example.videoapp.Model.ContentDTO
 import com.example.videoapp.Model.FcmPush
 import com.example.videoapp.Model.Users
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,9 +24,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_detail.view.*
-import kotlinx.android.synthetic.main.item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
-import java.lang.Exception
 
 
 class DetailViewFragment(
@@ -41,6 +36,7 @@ class DetailViewFragment(
 
     lateinit var mAuth: FirebaseAuth
     lateinit var comment_btn_send: FirebaseAuth
+    var auth : FirebaseAuth? = null
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,6 +44,15 @@ class DetailViewFragment(
         firestore = FirebaseFirestore.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
+        val currentUserUid = auth?.currentUser?.uid
+        var comment = ContentDTO.Comment()
+        var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
+
+        auth = FirebaseAuth.getInstance()
+
+
+
+        var users = FirebaseAuth.getInstance().currentUser
 
         fragmentview.videofragment?.setOnClickListener {
             var fragment = BlankFragment()
@@ -161,23 +166,41 @@ class DetailViewFragment(
                 startActivity(intent)
             }
 
+            viewholder.detailviewitem_imageview_content.setOnLongClickListener {
+                val firebase_url = contentDTOs[p1].imageUrl
+                val storageRef =
+                    firebase_url?.let { it1 ->
+                        FirebaseFirestore.getInstance().collection("images").document(
+                            it1
+                        )
+                    }
+
+
+
+
+                storageRef?.delete()?.addOnSuccessListener {
+                    // File deleted successfully
+                    Toast.makeText(context , "Deleted",Toast.LENGTH_SHORT).show()
+
+                }?.addOnFailureListener {
+                    // Uh-oh, an error occurred!
+                    Toast.makeText(context , "cannot delete",Toast.LENGTH_SHORT).show()
+                }
+
+                return@setOnLongClickListener true
+
+            }
             //Image
-            Glide.with(p0.itemView.context).load(contentDTOs[p1].imageUrl).into(viewholder.detailviewitem_imageview_content)
+            Glide.with(p0.itemView.context).load(contentDTOs[p1].imageUrl)
+                .into(viewholder.detailviewitem_imageview_content)
             var user = FirebaseAuth.getInstance().currentUser
             val uids = arguments?.getString("destinationUid")
 
             firestore = FirebaseFirestore.getInstance()
             val auth = FirebaseAuth.getInstance()
-           val currentUserUid = auth.currentUser?.uid
+           val currentUserUid = auth.currentUser?.email
 
 
-//            FirebaseFirestore.getInstance().collection("profileImages").document(contentDTOs[p1].uid!!).delete().addOnSuccessListener {
-//                Toast.makeText(context,"Your post successfully deleted",Toast.LENGTH_SHORT).show()
-//
-//                // File deleted successfully
-//            }.addOnFailureListener {
-//                Toast.makeText(context,"Cannot delete your post",Toast.LENGTH_SHORT).show()
-//                 }
 
             //Explain of content
             viewholder.detailviewitem_explain_textview.text = contentDTOs[p1].explain
@@ -197,6 +220,17 @@ class DetailViewFragment(
             }else{
                 //This is unlike status
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.meme3)
+            }
+
+            val users = FirebaseAuth.getInstance().currentUser?.email
+            if(str_0 == currentUserUid){
+                //MyPage
+                viewholder.example?.visibility = View.VISIBLE
+            }
+
+            if (str_0!=currentUserUid){
+                //OtherUserPage
+                viewholder.example?.visibility = View.GONE
             }
 
             //This code is when the profile image is clicked
